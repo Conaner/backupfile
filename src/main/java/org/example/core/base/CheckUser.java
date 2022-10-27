@@ -24,27 +24,48 @@ public class CheckUser{
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             con=DriverManager.getConnection(url,name,pass);
+//            if(con!=null) System.out.println("connect!");
         }catch(Exception e){
             System.out.println(e);
         }
     }
     //验证身份
     public boolean CheckRole(){
-        boolean ifright=false;
+//        boolean ifright=false;
         try{
             String sql= "Select * from account where username='" +
-                    user + "' and password='" + password + "'";
+                    this.user + "' and password='" + this.password + "'";
+//            System.out.println("sql="+sql);
             stmt=con.prepareStatement(sql);
 //            stmt.setString(1,this.user);
 //            stmt.setString(2,this.password);
             result=stmt.executeQuery(sql);
-            ifright= result.next();
-            result.close();
-            stmt.close();
-            con.close();
-        }catch(Exception e1){
-            System.out.println(e1);
+            return result.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (result!=null){
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (stmt!=null){
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (con!=null){
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return ifright;
+        return false;
     }
 }

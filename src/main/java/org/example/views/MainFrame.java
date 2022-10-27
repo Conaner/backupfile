@@ -79,14 +79,15 @@ public class MainFrame extends BaseFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CheckUser checkuser= new CheckUser();
-                checkuser.setUser(String.valueOf(userText));
-                checkuser.setPassword(String.valueOf(passwordText));
+                checkuser.setUser(userText.getText());
+                checkuser.setPassword(passwordText.getText());
 
-                System.out.println(userText.getText());
-                System.out.println(passwordText.getPassword());
+//                System.out.println(userText.getText());
+//                System.out.println(passwordText.getPassword());
 
                 boolean judge = checkuser.CheckRole();
-                System.out.println(judge);
+                if(judge)System.out.println("登录成功！");
+//                System.out.println("judge = "+ judge);
 //                System.out.println(userText.getText());
             }
         });
@@ -127,7 +128,7 @@ public class MainFrame extends BaseFrame {
             }
         });
 
-        String backupFilepathDir = "E:\\DataBackup";
+        String backupFilepathDir = "E:\\DataBackup" + userText.getText();
 
         JButton zipButton = new JButton("压缩");
         zipButton.setBounds(10 , 150, 80, 25);
