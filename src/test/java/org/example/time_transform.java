@@ -11,7 +11,7 @@ public class time_transform {
 
             System.out.println(date);
             String Str_data=date.toString();
-            System.out.println(Str_data.replaceAll("(: )|\\:","_"));
+            System.out.println(Str_data.replaceAll("[ :]","_"));
         }
 
 //    public static void main( String[] args ) {

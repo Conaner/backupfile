@@ -35,9 +35,10 @@ public class FileChooser extends JFrame implements ActionListener{
         }else if(file.isFile()){  
             System.out.println("文件:"+file.getAbsolutePath());  
         }  
-        System.out.println(jfc.getSelectedFile().getName());  
-          
-    }  
+        System.out.println(jfc.getSelectedFile().getName());
+
+//        return null;
+    }
     
 
   
