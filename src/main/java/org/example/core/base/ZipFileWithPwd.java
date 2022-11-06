@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ZipFileWithPwd {
-    public static void zipFile_dir(String dir, String final_filename) throws ZipException {
+    public static void zipFile_dir(String dir, String final_filename,String file_password) throws ZipException {
         // 生成的压缩文件
         ZipFile zipFile = new ZipFile(final_filename);
         ZipParameters parameters = new ZipParameters();
@@ -28,9 +28,9 @@ public class ZipFileWithPwd {
 
 //        InputCodeFrame fr = new InputCodeFrame();
 //        String password = fr.init();
-        Scanner in=new Scanner(System.in);
-        System.out.println("请输入待压缩包密码：");
-        zipFile.setPassword(in.next().trim().toCharArray());
+//        Scanner in=new Scanner(System.in);
+//        System.out.println("请输入待压缩包密码：");
+        zipFile.setPassword(file_password.toCharArray());
 //        zipFile.setPassword(password.toCharArray());
 //        zipFile.setPassword("111".toCharArray());
         // 要打包的文件夹
@@ -45,7 +45,7 @@ public class ZipFileWithPwd {
             }
         }
     }
-    public static void zipFiles(File[] files, String final_filename) throws ZipException {
+    public static void zipFiles(File[] files, String final_filename,String file_password) throws ZipException {
         // 生成的压缩文件
         ZipFile zipFile = new ZipFile(final_filename);
         ZipParameters parameters = new ZipParameters();
@@ -56,10 +56,10 @@ public class ZipFileWithPwd {
         parameters.setEncryptFiles( true );
         parameters.setEncryptionMethod(EncryptionMethod.AES);
         parameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
-
-        Scanner in=new Scanner(System.in);
-        System.out.println("请输入待压缩包密码：");
-        zipFile.setPassword(in.next().trim().toCharArray());
+//
+//        Scanner in=new Scanner(System.in);
+//        System.out.println("请输入待压缩包密码：");
+        zipFile.setPassword(file_password.toCharArray());
         // 遍历test文件夹下所有的文件、文件夹
         for (File f : files) {
             if (f.isDirectory()) {
