@@ -16,9 +16,9 @@ public class CheckUser{
     Connection con=null;
     PreparedStatement stmt=null;
     ResultSet result=null;
-    String url="jdbc:mysql://localhost:3306/db1";
+    String url="jdbc:mysql://112.74.100.139:3306/db1";
     String name="root";
-    String pass="root";
+    String pass="123456";
     //连接数据库
     public CheckUser(){
         try{

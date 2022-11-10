@@ -1,7 +1,7 @@
 package org.example.views;
 
+import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
-import org.example.core.base.BaseFrame;
 import org.example.core.base.ZipFileWithPwd;
 
 import javax.swing.*;
@@ -9,19 +9,26 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class InputCodeFrame extends JFrame {
     String password;
-    JTextField selectDirText1;
-    JTextField selectDirText2;
-    JTextField extension;
+    String selectDirText1;
+    String selectDirText2;
+    String extension;
     String final_filename;
-    public InputCodeFrame(JTextField selectDirText1,JTextField selectDirText2,JTextField extension,String final_filename){
+    String source_dir;
+    String destination_dir;
+    boolean select_flag;
+    public InputCodeFrame(String selectDirText1, String selectDirText2, String extension, String final_filename, String source_dir, String destination_dir, boolean select_flag){
         this.selectDirText1 = selectDirText1;
         this.selectDirText2 = selectDirText2;
         this.extension = extension;
         this.final_filename = final_filename;
+        this.source_dir = source_dir;
+        this.destination_dir = destination_dir;
+        this.select_flag = select_flag;
         initView();
     }
     public void initView() {
@@ -58,26 +65,41 @@ public class InputCodeFrame extends JFrame {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        if (!Objects.equals(selectDirText1.getText(), "")) {
-                            try {
-//                                System.out.println(password);
-                                ZipFileWithPwd.zipFile_dir(selectDirText1.getText(), final_filename, password);
-                            } catch (ZipException ex) {
+                        if (select_flag) {
+                            if (!Objects.equals(selectDirText1, "")) {
+                                try {
+                                    //                                System.out.println(password);
+                                    ZipFileWithPwd.zipFile_dir(selectDirText1, final_filename, password);
+                                } catch (ZipException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            } else if (!Objects.equals(selectDirText2, "")) {
+                                String extension1 = extension;
+                                File file = new File(selectDirText2);
+                                File[] listFiles = file.listFiles((d, s) -> s.toLowerCase().endsWith(extension1));
+                                try {
+                                    ZipFileWithPwd.zipFiles(listFiles, final_filename, password);
+                                } catch (ZipException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        }
+                        else{
+                            System.out.println("解压中...");
+                            try (ZipFile zipFile = new ZipFile(source_dir)) {
+                                zipFile.setPassword(password.toCharArray());
+                                try {
+                                    zipFile.extractAll(destination_dir);
+                                } catch (ZipException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
-                        } else if (!Objects.equals(selectDirText2.getText(), "")) {
-                            String extension1 = extension.getText();
-                            File file = new File(selectDirText2.getText());
-                            File[] listFiles = file.listFiles((d, s) -> s.toLowerCase().endsWith(extension1));
-                            try {
-                                ZipFileWithPwd.zipFiles(listFiles, final_filename, password);
-                            } catch (ZipException ex) {
-                                throw new RuntimeException(ex);
-                            }
+                            System.out.println("解压成功");
                         }
                     }
                 }).start();
-
                 System.out.println("压缩成功");
                 frame.dispose();
 //                return inputText.getText();
