@@ -71,7 +71,7 @@ public class RegisterFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String name = userName.getText();
                 String ID = userID.getText();
-                String passwd = password.getPassword().toString();
+                String passwd = String.valueOf(password.getPassword());
                 String confrimpasswd = new String (confrimPassword.getPassword());
 
                 //创建Register类
