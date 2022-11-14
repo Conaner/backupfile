@@ -33,7 +33,6 @@ public class InputCodeFrame extends JFrame {
     }
     public void initView() {
         JFrame frame = new JFrame("压缩包密码");
-
         frame.setLayout(null);
 
         Container container = frame.getContentPane();
@@ -60,20 +59,22 @@ public class InputCodeFrame extends JFrame {
         Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("压缩中...");
                 password = inputText.getText();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         if (select_flag) {
                             if (!Objects.equals(selectDirText1, "")) {
+                                System.out.println("压缩中...");
                                 try {
                                     //                                System.out.println(password);
                                     ZipFileWithPwd.zipFile_dir(selectDirText1, final_filename, password);
                                 } catch (ZipException ex) {
                                     throw new RuntimeException(ex);
                                 }
+                                System.out.println("压缩成功");
                             } else if (!Objects.equals(selectDirText2, "")) {
+                                System.out.println("压缩中...");
                                 String extension1 = extension;
                                 File file = new File(selectDirText2);
                                 File[] listFiles = file.listFiles((d, s) -> s.toLowerCase().endsWith(extension1));
@@ -82,25 +83,30 @@ public class InputCodeFrame extends JFrame {
                                 } catch (ZipException ex) {
                                     throw new RuntimeException(ex);
                                 }
+                                System.out.println("压缩成功");
+                            }
+                            else{
+                                System.out.println("请输入待压缩文件路径");
                             }
                         }
                         else{
                             System.out.println("解压中...");
+                            boolean flag = true;
                             try (ZipFile zipFile = new ZipFile(source_dir)) {
                                 zipFile.setPassword(password.toCharArray());
                                 try {
                                     zipFile.extractAll(destination_dir);
                                 } catch (ZipException ex) {
-                                    throw new RuntimeException(ex);
+                                    flag = false;
+                                    System.out.println("密码错误,解压失败");
                                 }
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
-                            System.out.println("解压成功");
+                            if(flag) System.out.println("解压成功");
                         }
                     }
                 }).start();
-                System.out.println("压缩成功");
                 frame.dispose();
 //                return inputText.getText();
             }

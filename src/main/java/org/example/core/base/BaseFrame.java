@@ -8,7 +8,7 @@ public class BaseFrame extends JFrame {
         initView();
     }
 
-    public void initView(){
+        public void initView(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // 显示窗口
 
