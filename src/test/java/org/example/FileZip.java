@@ -1,4 +1,4 @@
-package org.example.core.base;
+package org.example;
 
 import net.lingala.zip4j.model.ZipParameters;
 
