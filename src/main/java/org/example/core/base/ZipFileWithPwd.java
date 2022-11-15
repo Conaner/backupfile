@@ -7,13 +7,10 @@ import net.lingala.zip4j.model.enums.AesKeyStrength;
 import net.lingala.zip4j.model.enums.CompressionLevel;
 import net.lingala.zip4j.model.enums.CompressionMethod;
 import net.lingala.zip4j.model.enums.EncryptionMethod;
-import org.example.views.InputCodeFrame;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class ZipFileWithPwd {
     public static void zipFile_dir(String dir, String final_filename,String file_password) throws ZipException {

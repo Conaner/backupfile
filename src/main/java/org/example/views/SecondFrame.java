@@ -2,9 +2,6 @@ package org.example.views;
 
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
-import net.lingala.zip4j.model.ZipParameters;
-import net.lingala.zip4j.model.enums.AesKeyStrength;
-import net.lingala.zip4j.model.enums.EncryptionMethod;
 import org.example.core.base.*;
 
 import javax.swing.*;
@@ -14,8 +11,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class SecondFrame extends BaseFrame {
     private static String userText;
@@ -60,7 +55,7 @@ public class SecondFrame extends BaseFrame {
         inputText.setBounds(140, 80, 165, 25);
         pane.add(inputText);
 
-        selectDirText1.setText("E:\\test_dir");
+        selectDirText1.setText("");
         selectDirText2.setText("");
         inputText.setText(".doc");
 
@@ -75,10 +70,6 @@ public class SecondFrame extends BaseFrame {
         File folder = new File(backupFilepathDir);
         if (!folder.exists() && !folder.isDirectory())
             folder.mkdirs();
-//            System.out.println("创建文件夹");
-//        } else {
-//            System.out.println("文件夹已存在");
-//        }
 
         JButton zipButton = new JButton("压缩");
         zipButton.setBounds(10, 120, 80, 25);
@@ -94,77 +85,11 @@ public class SecondFrame extends BaseFrame {
                 select_flag = true;
                 InputCodeFrame frame = new InputCodeFrame(selectDirText1.getText(),selectDirText2.getText(),inputText.getText(),final_filename,"","",select_flag);
                 try {
-//                    if (!Objects.equals(selectDirText1.getText(), "")){
-////                        System.out.println("here");
-//                        new Thread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                try {
-//                                    ZipFileWithPwd.zipFile_dir(selectDirText1.getText(),final_filename,file_password);
-//                                } catch (ZipException ex) {
-//                                    throw new RuntimeException(ex);
-//                                }
-//                            }
-//                        }).start();
-//                    }
-//                    else if (!Objects.equals(selectDirText2.getText(), "")){
-//                        new Thread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                try {
-//                                    String extension = inputText.getText();
-//                                    File file =new File(selectDirText2.getText());
-//                                    File[] listFiles = file.listFiles((d, s) -> s.toLowerCase().endsWith(extension));
-//                                    ZipFileWithPwd.zipFiles(listFiles,final_filename,file_password);
-//                                } catch (ZipException ex) {
-//                                    throw new RuntimeException(ex);
-//                                }
-//                            }
-//                        }).start();
-//                 }
-//                    ZipParameters zipParameters = new ZipParameters();
-//                    zipParameters.setEncryptFiles(true);
-//                    zipParameters.setEncryptionMethod(EncryptionMethod.AES);
-//                    zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
-//                    Scanner in=new Scanner(System.in);
-//                    System.out.println("请输入待压缩包密码：");
-//                    file_password = in.next().trim();
-//                    ZipFile zipFile = new ZipFile(final_filename, file_password.toCharArray());
-//                    zipFile.addFile(final_filename, zipParameters);
-
-
-//                    zipFile.setPassword(in.next().trim().toCharArray());
                     String file = Str_data + ".zip";
                     removeFileFromZip.removeFile(new File(final_filename),file);
-
-//                    System.out.println("压缩成功");
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-
-
-
-
-//                Date date = new Date();
-//                String Str_data = date.toString().replaceAll("[ :]", "_");
-//
-//                String file = backupFilepathDir + "\\" + Str_data + ".zip";
-//
-//                ZipParameters zipParameters = new ZipParameters();
-//                zipParameters.setEncryptFiles(true);
-//                zipParameters.setEncryptionMethod(EncryptionMethod.AES);
-//                zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
-//
-//
-//                ZipFile zipFile = new ZipFile(file, file_password.toCharArray());
-//                File fileDir = new File(selectDirText.getText());
-//                try {
-//                    zipFile.addFolder(fileDir, zipParameters);
-//                    System.out.println("压缩成功");
-//                } catch (ZipException ex) {
-//                    ex.printStackTrace();
-//                }
-             //   return Str_data;
             }
 
         });
@@ -210,27 +135,11 @@ public class SecondFrame extends BaseFrame {
                     }
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
-                }
-//                    System.out.println("解压中...");
-//                    ZipFile zipFile = new ZipFile(selectDirText_.getText());
-//                    checkEncrypted(zipFile);
-//                    zipFile.extractAll(selectDirText__.getText());
-////                    FileZip.ZipUncompress(selectDirText_.getText(), selectDirText__.getText());
-//                    System.out.println("解压成功");
+                };
             }
         });
 
     }
-
-//    private void checkEncrypted(ZipFile zip) throws ZipException {
-//        Scanner in=new Scanner(System.in);
-//        if (zip.isEncrypted()) {
-//            System.out.println("文件"+zip.getFile().getName()+"有密码！");
-//            System.out.println("请输入密码：");
-//            zip.setPassword(in.next().trim().toCharArray());
-//        }
-//        in.close();
-//    }
     private void selectFile(Container pane, JTextField selectDirText, JButton selectFileButton) {
         pane.add(selectFileButton);
         selectFileButton.addActionListener(new ActionListener() {
@@ -241,12 +150,6 @@ public class SecondFrame extends BaseFrame {
                 jfc.showDialog(new JLabel(), "选择文件夹");
                 File file = jfc.getSelectedFile();
                 selectDirText.setText(file.getAbsolutePath());
-//                if (file.isDirectory()) {
-//                    System.out.println("文件夹:" + file.getAbsolutePath());
-//                    selectDirText.setText(file.getAbsolutePath());
-//                } else if (file.isFile()) {
-//                    System.out.println("请选择文件夹");
-//                }
             }
         });
     }
