@@ -17,8 +17,8 @@ public class CheckUser{
     PreparedStatement stmt=null;
     ResultSet result=null;
     String url="jdbc:mysql://112.74.100.139:3306/db1";
-    String name="root";
-    String pass="123456";
+    String name="user";
+    String pass="password";
     //连接数据库
     public CheckUser(){
         try{

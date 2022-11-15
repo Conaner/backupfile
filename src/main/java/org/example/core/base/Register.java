@@ -15,8 +15,8 @@ public class Register {
 
     private final String driver = "com.mysql.cj.jdbc.Driver";
     private final String url = "jdbc:mysql://112.74.100.139:3306/db1";
-    private final String user = "root";
-    private final String sqlpassword = "123456";
+    private final String user = "user";
+    private final String sqlpassword = "password";
 
     public void setName(String name) {
         this.name = name;
