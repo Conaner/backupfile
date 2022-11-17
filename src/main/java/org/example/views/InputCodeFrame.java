@@ -93,7 +93,7 @@ public class InputCodeFrame extends JFrame {
                             System.out.println("解压中...");
                             boolean flag = true;
                             try (ZipFile zipFile = new ZipFile(source_dir)) {
-                                zipFile.setPassword(password.toCharArray());
+                                    zipFile.setPassword(password.toCharArray());
                                 try {
                                     zipFile.extractAll(destination_dir);
                                 } catch (ZipException ex) {

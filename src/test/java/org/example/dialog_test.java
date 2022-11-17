@@ -31,9 +31,9 @@ public class dialog_test extends JFrame {
         container.add(button);
     }
 
-    public static void main(String[] args) {
-        new dialog_test();
-    }
+//    public static void main(String[] args) {
+//        new dialog_test();
+//    }
 }
 //弹窗的窗口
 class MyDialogDemo extends JDialog{

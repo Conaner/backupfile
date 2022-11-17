@@ -41,10 +41,7 @@ public class SecondFrame extends BaseFrame {
         JLabel selectDir3 = new JLabel("请输入文件格式：");
         selectDir3.setBounds(10, 80, 120, 25);
         pane.add(selectDir3);
-        /*
-         *这个类似用于输入的文本域
-         * 但是输入的信息会以点号代替，用于包含密码的安全性
-         */
+
         JTextField selectDirText1 = new JTextField(20);
         selectDirText1.setBounds(140, 50-30, 165, 25);
         pane.add(selectDirText1);
@@ -75,7 +72,6 @@ public class SecondFrame extends BaseFrame {
         zipButton.setBounds(10, 120, 80, 25);
         pane.add(zipButton);
         zipButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 //                System.out.println("压缩中...");
@@ -91,7 +87,6 @@ public class SecondFrame extends BaseFrame {
                     throw new RuntimeException(ex);
                 }
             }
-
         });
 
         JLabel selectDir_ = new JLabel("待解压文件路径:");
